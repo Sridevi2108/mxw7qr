@@ -1,0 +1,36 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: windwise-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - CORS_ORIGINS=*
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./backend/data:/app/backend/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: windwise-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+networks:
+  default:
+    name: windwise-network

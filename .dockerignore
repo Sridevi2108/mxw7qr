@@ -1,0 +1,14 @@
+# Ignore build and cache artifacts
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+.pytest_cache/
+__pycache__/
+*/__pycache__/
+*/*/__pycache__/
+.git/
+.gitignore
+.vscode/
+.idea/
+*.log
