@@ -218,5 +218,5 @@ python -m pytest backend/tests/ -v
 ## 8. AI Tools Disclosure
 
 In accordance with Section 2 of the assignment brief:
-* **AI Coding Assistant**: Google Antigravity (powered by Gemini) was used to assist with domain research, API contract generation, automated test drafting, data ingestion scripting, and frontend React component refinement.
+* **AI Coding Assistant**: Gemini was used to assist with domain research, API contract generation, automated test drafting, data ingestion scripting, and frontend React component refinement.
 * All data logic, mathematical formulas, and Elexon endpoints were independently verified against official BSC documentation and live BMRS API streams.
