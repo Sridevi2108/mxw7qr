@@ -10,7 +10,9 @@ import type {
 import verifiedDataset from '@/data/january_2026_verified.json';
 import { calcAccuracyMetrics } from '@/utils/metrics';
 
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL as string | undefined) ?? 'http://localhost:8000';
+const API_BASE_URL =
+  (import.meta.env.VITE_API_BASE_URL as string | undefined) ??
+  (import.meta.env.PROD ? 'https://mxw7qr-backend.onrender.com' : 'http://localhost:8000');
 
 let isBackendLive = false;
 
