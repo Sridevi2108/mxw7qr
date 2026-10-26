@@ -98,7 +98,7 @@ export function DashboardPage() {
         <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-4">
           <div className="flex flex-wrap items-center gap-4">
             <div>
-              <label className="mb-1 block text-xs font-semibold text-slate-500">
+              <label className="mb-1 block text-xs font-semibold text-ink-muted">
                 Delivery Date (January 2026)
               </label>
               <input
@@ -107,18 +107,18 @@ export function DashboardPage() {
                 min="2026-01-01"
                 max="2026-01-31"
                 onChange={(e) => setDeliveryDate(e.target.value)}
-                className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+                className="rounded-lg border border-line bg-white px-3 py-1.5 text-xs font-medium font-mono text-ink shadow-sm outline-none focus:border-brand focus:ring-1 focus:ring-brand"
               />
             </div>
 
             <div>
-              <label className="mb-1 block text-xs font-semibold text-slate-500">
+              <label className="mb-1 block text-xs font-semibold text-ink-muted">
                 D-1 Decision Cutoff (UTC/GMT)
               </label>
               <select
                 value={cutoffTime}
                 onChange={(e) => setCutoffTime(e.target.value)}
-                className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+                className="rounded-lg border border-line bg-white px-3 py-1.5 text-xs font-medium text-ink shadow-sm outline-none focus:border-brand focus:ring-1 focus:ring-brand"
               >
                 {CUTOFF_PRESETS.map((p) => (
                   <option key={p.value} value={p.value}>
@@ -129,13 +129,13 @@ export function DashboardPage() {
             </div>
 
             <div>
-              <label className="mb-1 block text-xs font-semibold text-slate-500">Resolution</label>
-              <div className="flex rounded-lg border border-slate-200 bg-slate-100 p-0.5 text-xs font-medium text-slate-600">
+              <label className="mb-1 block text-xs font-semibold text-ink-muted">Resolution</label>
+              <div className="flex rounded-lg border border-line bg-surface-warm p-0.5 text-xs font-medium text-ink-muted">
                 <button
                   type="button"
                   onClick={() => setGranularity('hourly')}
                   className={`rounded-md px-3 py-1 transition ${
-                    granularity === 'hourly' ? 'bg-white font-semibold text-teal-700 shadow-sm' : 'hover:text-slate-900'
+                    granularity === 'hourly' ? 'bg-white font-semibold text-brand shadow-sm border border-line/60' : 'hover:text-ink'
                   }`}
                 >
                   Hourly (24 intervals)
@@ -144,7 +144,7 @@ export function DashboardPage() {
                   type="button"
                   onClick={() => setGranularity('half_hourly')}
                   className={`rounded-md px-3 py-1 transition ${
-                    granularity === 'half_hourly' ? 'bg-white font-semibold text-teal-700 shadow-sm' : 'hover:text-slate-900'
+                    granularity === 'half_hourly' ? 'bg-white font-semibold text-brand shadow-sm border border-line/60' : 'hover:text-ink'
                   }`}
                 >
                   Settlement Periods (48 SPs)
@@ -167,25 +167,25 @@ export function DashboardPage() {
       </Card>
 
       {/* Gate Closure & Publication Status Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-800 bg-slate-900 px-5 py-3 text-xs text-slate-200 shadow-sm">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-brand/20 bg-brand/[0.04] px-5 py-3 text-xs text-ink shadow-sm">
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1.5 font-semibold text-emerald-400">
+          <div className="flex items-center gap-1.5 font-semibold text-brand">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-brand"></span>
             </span>
             AUCTION GATE LOCK
           </div>
-          <span className="text-slate-700">|</span>
-          <span className="text-slate-300">
-            Decision Cutoff: <strong className="font-mono text-white">D-1 @ {cutoffTime} UTC</strong>
+          <span className="text-line">|</span>
+          <span className="text-ink-muted">
+            Decision Cutoff: <strong className="font-mono text-ink">D-1 @ {cutoffTime} UTC</strong>
           </span>
-          <span className="hidden sm:inline text-slate-700">|</span>
-          <span className="hidden sm:inline text-slate-400">Strict pre-gate forecast selection</span>
+          <span className="hidden sm:inline text-line">|</span>
+          <span className="hidden sm:inline text-ink-subtle">Strict pre-gate forecast selection</span>
         </div>
         {latestPublishTime && (
-          <div className="flex items-center gap-2 font-mono text-xs text-teal-300">
-            <span className="text-slate-400 font-sans text-[11px]">ACTIVE VINTAGE:</span>
+          <div className="flex items-center gap-2 font-mono text-xs text-brand font-semibold">
+            <span className="text-ink-muted font-sans text-[11px]">ACTIVE VINTAGE:</span>
             <span>{formatDateTime(latestPublishTime)} UTC</span>
           </div>
         )}
@@ -247,8 +247,8 @@ export function DashboardPage() {
           subtitle={`National UK Wind Generation (MW) at ${cutoffTime} UTC Cutoff. Timezone: UTC/GMT.`}
           action={
             <div className="flex items-center gap-2">
-              <Badge variant="teal">Day-Ahead Forecast</Badge>
-              <Badge variant="green">Actual Generation</Badge>
+              <Badge variant="brand">Day-Ahead Forecast</Badge>
+              <Badge variant="neutral">Actual Generation</Badge>
               {showScenario && <Badge variant="amber">Illustrative Thermal Gap</Badge>}
             </div>
           }
@@ -265,26 +265,32 @@ export function DashboardPage() {
               <ComposedChart data={chartData} margin={{ top: 10, right: 30, left: 10, bottom: 5 }}>
                 <defs>
                   <linearGradient id="forecastGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#0d9488" stopOpacity={0.25} />
-                    <stop offset="95%" stopColor="#0d9488" stopOpacity={0} />
+                    <stop offset="5%" stopColor="#148937" stopOpacity={0.22} />
+                    <stop offset="95%" stopColor="#148937" stopOpacity={0.01} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                <XAxis dataKey="time" tick={{ fontSize: 11, fill: '#64748b' }} interval={granularity === 'half_hourly' ? 3 : 1} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e6e4dd" vertical={false} />
+                <XAxis dataKey="time" tick={{ fontSize: 11, fill: '#5a5856', fontFamily: 'JetBrains Mono' }} interval={granularity === 'half_hourly' ? 3 : 1} />
                 <YAxis
-                  tick={{ fontSize: 12, fill: '#64748b' }}
-                  label={{ value: 'Generation (MW)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 12 }}
+                  tick={{ fontSize: 11, fill: '#5a5856', fontFamily: 'JetBrains Mono' }}
+                  label={{ value: 'Generation (MW)', angle: -90, position: 'insideLeft', fill: '#5a5856', fontSize: 11 }}
                 />
                 <Tooltip
-                  contentStyle={{ borderRadius: 12, border: '1px solid #cbd5e1', fontSize: 12 }}
+                  contentStyle={{
+                    borderRadius: 8,
+                    border: '1px solid #e6e4dd',
+                    fontSize: 12,
+                    boxShadow: '0 4px 12px rgba(43,42,42,0.08)',
+                    fontFamily: 'Inter',
+                  }}
                   formatter={(val, name) => [formatMW(Number(val)), name]}
                   labelFormatter={(lbl, items) => {
                     const itm = items && items[0] ? (items[0].payload as any) : null;
                     return (
-                      <div className="mb-1 border-b border-slate-100 pb-1">
-                        <div className="font-semibold text-slate-800">{lbl}</div>
+                      <div className="mb-1 border-b border-line pb-1">
+                        <div className="font-semibold text-ink">{lbl}</div>
                         {itm?.publishTime && (
-                          <div className="text-[11px] text-teal-700">
+                          <div className="text-[11px] text-brand">
                             Forecast Published: {formatDateTime(itm.publishTime)} UTC
                           </div>
                         )}
@@ -297,13 +303,13 @@ export function DashboardPage() {
                     );
                   }}
                 />
-                <Legend />
+                <Legend iconType="circle" />
                 <Area
                   type="monotone"
                   dataKey="Forecast"
                   name="Day-Ahead Wind Forecast (MW)"
-                  stroke="#0d9488"
-                  strokeWidth={2}
+                  stroke="#148937"
+                  strokeWidth={2.5}
                   fill="url(#forecastGrad)"
                   connectNulls
                 />
@@ -311,7 +317,7 @@ export function DashboardPage() {
                   type="monotone"
                   dataKey="Actual"
                   name="Actual Wind Generation (MW)"
-                  stroke="#10b981"
+                  stroke="#2b2a2a"
                   strokeWidth={2.5}
                   dot={false}
                   connectNulls
@@ -321,7 +327,7 @@ export function DashboardPage() {
                     type="stepAfter"
                     dataKey="IllustrativeThermalGap"
                     name="Illustrative Thermal Procured (MW)"
-                    stroke="#f59e0b"
+                    stroke="#d97706"
                     strokeWidth={2}
                     strokeDasharray="4 4"
                     dot={false}
@@ -336,14 +342,14 @@ export function DashboardPage() {
       {/* Illustrative Supply Gap Scenario Section (Optional / Expandable) */}
       {showScenario && (
         <Card>
-          <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/80 px-6 py-4">
+          <div className="flex items-center justify-between border-b border-line bg-surface-warm px-6 py-4">
             <div className="flex items-center gap-2.5">
-              <Sliders className="h-4 w-4 text-teal-600" />
+              <Sliders className="h-4 w-4 text-brand" />
               <div>
-                <h3 className="text-sm font-bold text-slate-900">
+                <h3 className="text-sm font-bold text-ink">
                   Portfolio Dispatch & Thermal Hedging Simulation
                 </h3>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-ink-muted">
                   Simulate net thermal dispatch requirement across portfolio wind allocations and reserve margins
                 </p>
               </div>
@@ -354,7 +360,7 @@ export function DashboardPage() {
           <div className="p-6">
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               <div>
-                <label className="text-xs font-semibold text-slate-500">Illustrative Demand: {formatMW(illustrativeDemand)}</label>
+                <label className="text-xs font-semibold text-ink-muted">Illustrative Demand: <span className="font-mono text-ink font-bold">{formatMW(illustrativeDemand)}</span></label>
                 <input
                   type="range"
                   min="15000"
@@ -362,12 +368,12 @@ export function DashboardPage() {
                   step="1000"
                   value={illustrativeDemand}
                   onChange={(e) => setIllustrativeDemand(Number(e.target.value))}
-                  className="mt-2 w-full accent-teal-600"
+                  className="mt-2 w-full accent-brand"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-500">Contracted Wind Share: {contractedShare}%</label>
+                <label className="text-xs font-semibold text-ink-muted">Contracted Wind Share: <span className="font-mono text-ink font-bold">{contractedShare}%</span></label>
                 <input
                   type="range"
                   min="1"
@@ -375,12 +381,12 @@ export function DashboardPage() {
                   step="1"
                   value={contractedShare}
                   onChange={(e) => setContractedShare(Number(e.target.value))}
-                  className="mt-2 w-full accent-teal-600"
+                  className="mt-2 w-full accent-brand"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-500">Other Base Supply: {formatMW(otherSupply)}</label>
+                <label className="text-xs font-semibold text-ink-muted">Other Base Supply: <span className="font-mono text-ink font-bold">{formatMW(otherSupply)}</span></label>
                 <input
                   type="range"
                   min="5000"
@@ -388,12 +394,12 @@ export function DashboardPage() {
                   step="500"
                   value={otherSupply}
                   onChange={(e) => setOtherSupply(Number(e.target.value))}
-                  className="mt-2 w-full accent-teal-600"
+                  className="mt-2 w-full accent-brand"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-500">Safety Reserve Margin: {safetyMargin}%</label>
+                <label className="text-xs font-semibold text-ink-muted">Safety Reserve Margin: <span className="font-mono text-ink font-bold">{safetyMargin}%</span></label>
                 <input
                   type="range"
                   min="0"
@@ -401,24 +407,23 @@ export function DashboardPage() {
                   step="1"
                   value={safetyMargin}
                   onChange={(e) => setSafetyMargin(Number(e.target.value))}
-                  className="mt-2 w-full accent-teal-600"
+                  className="mt-2 w-full accent-brand"
                 />
               </div>
             </div>
 
-            <div className="mt-6 rounded-xl bg-slate-50 p-4 text-xs text-slate-600">
-              <span className="font-semibold text-slate-700">Procurement Mechanism:</span> Net Thermal Procurement Needed ={' '}
-              <code className="rounded bg-slate-200 px-1 py-0.5 text-slate-800">
+            <div className="mt-6 rounded-lg bg-surface-warm border border-line p-4 text-xs text-ink-muted">
+              <span className="font-semibold text-ink">Procurement Formula:</span> Net Thermal Target ={' '}
+              <code className="rounded bg-white border border-line px-1.5 py-0.5 font-mono text-ink text-[11px]">
                 max(0, Demand × (1 + Reserve) - (Contracted Wind + Other Supply))
               </code>
-              . If wind generation is over-forecasted, the utility under-procures in the day-ahead auction and faces punitive system cashout prices in the balancing mechanism.
             </div>
           </div>
         </Card>
       )}
 
       {/* Footer Info */}
-      <div className="flex flex-wrap items-center justify-between text-xs text-slate-400 px-1">
+      <div className="flex flex-wrap items-center justify-between text-xs text-ink-subtle px-1">
         <span>Verified Elexon BMRS Data (FUELHH actuals & WINDFOR forecasts). All timestamps in UTC/GMT.</span>
         <span>Resolution: {granularity === 'half_hourly' ? '30-minute settlement periods' : '1-hour intervals'}</span>
       </div>

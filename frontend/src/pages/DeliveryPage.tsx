@@ -39,26 +39,26 @@ export function DeliveryPage() {
         <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-4">
           <div className="flex flex-wrap items-center gap-4">
             <div>
-              <label className="mb-1 block text-xs font-semibold text-slate-500">Delivery Date (January 2026)</label>
-              <div className="flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-1.5 shadow-sm">
-                <Calendar className="h-4 w-4 text-slate-400" />
+              <label className="mb-1 block text-xs font-semibold text-ink-muted">Delivery Date (January 2026)</label>
+              <div className="flex items-center gap-2 rounded-lg border border-line bg-surface px-3 py-1.5 shadow-sm">
+                <Calendar className="h-4 w-4 text-ink-subtle" />
                 <input
                   type="date"
                   value={date}
                   min="2026-01-01"
                   max="2026-01-31"
                   onChange={(e) => setDate(e.target.value)}
-                  className="text-sm font-medium text-slate-700 outline-none"
+                  className="text-sm font-medium text-ink bg-transparent outline-none font-mono"
                 />
               </div>
             </div>
 
             <div>
-              <label className="mb-1 block text-xs font-semibold text-slate-500">D-1 Cutoff Time (UTC)</label>
+              <label className="mb-1 block text-xs font-semibold text-ink-muted">D-1 Cutoff Time (UTC)</label>
               <select
                 value={cutoffTime}
                 onChange={(e) => setCutoffTime(e.target.value)}
-                className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+                className="rounded-lg border border-line bg-surface px-3 py-1.5 text-sm font-medium text-ink shadow-sm outline-none focus:border-brand focus:ring-1 focus:ring-brand font-mono"
               >
                 {CUTOFF_PRESETS.map((p) => (
                   <option key={p.value} value={p.value}>
@@ -69,13 +69,13 @@ export function DeliveryPage() {
             </div>
 
             <div>
-              <label className="mb-1 block text-xs font-semibold text-slate-500">Granularity</label>
-              <div className="flex rounded-lg border border-slate-200 bg-slate-100 p-0.5 text-xs font-medium text-slate-600">
+              <label className="mb-1 block text-xs font-semibold text-ink-muted">Granularity</label>
+              <div className="flex rounded-lg border border-line bg-surface-warm p-0.5 text-xs font-medium text-ink-muted">
                 <button
                   type="button"
                   onClick={() => setGranularity('half_hourly')}
                   className={`rounded-md px-3 py-1 transition ${
-                    granularity === 'half_hourly' ? 'bg-white font-semibold text-teal-700 shadow-sm' : 'hover:text-slate-900'
+                    granularity === 'half_hourly' ? 'bg-surface font-semibold text-brand shadow-sm' : 'hover:text-ink'
                   }`}
                 >
                   Settlement Periods (48 SPs)
@@ -84,7 +84,7 @@ export function DeliveryPage() {
                   type="button"
                   onClick={() => setGranularity('hourly')}
                   className={`rounded-md px-3 py-1 transition ${
-                    granularity === 'hourly' ? 'bg-white font-semibold text-teal-700 shadow-sm' : 'hover:text-slate-900'
+                    granularity === 'hourly' ? 'bg-surface font-semibold text-brand shadow-sm' : 'hover:text-ink'
                   }`}
                 >
                   Hourly (24 intervals)
@@ -108,7 +108,7 @@ export function DeliveryPage() {
           title={`Delivery Interval Ledger — ${date}`}
           subtitle={`All intervals in UTC/GMT. Evaluated against ${cutoffTime} UTC D-1 Day-Ahead Cutoff.`}
           action={
-            <div className="flex items-center gap-2 text-xs text-slate-500">
+            <div className="flex items-center gap-2 text-xs text-ink-muted">
               <span>{snapshots.length} intervals</span>
               <span>·</span>
               <span>{snapshots.filter((s) => s.actualMW !== null && s.forecastMW !== null).length} matched</span>
@@ -125,7 +125,7 @@ export function DeliveryPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="border-b border-slate-200 bg-slate-50/75 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+                <tr className="border-b border-line bg-surface-warm text-[11px] font-semibold uppercase tracking-wider text-ink-muted">
                   <th className="px-4 py-3">Interval</th>
                   <th className="px-4 py-3">Start (UTC)</th>
                   <th className="px-4 py-3">End (UTC)</th>
@@ -138,43 +138,43 @@ export function DeliveryPage() {
                   <th className="px-4 py-3 text-center">Outcome</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 font-mono">
+              <tbody className="divide-y divide-line font-mono">
                 {snapshots.map((r, idx) => {
                   const label = r.settlementPeriod ? `SP ${r.settlementPeriod}` : `Hour ${r.intervalHour ?? idx}`;
                   const isOver = r.errorMW !== null && r.errorMW !== undefined && r.errorMW > 0;
                   const isUnder = r.errorMW !== null && r.errorMW !== undefined && r.errorMW < 0;
 
                   return (
-                    <tr key={idx} className="transition hover:bg-slate-50/80 font-sans">
-                      <td className="px-4 py-2.5 font-bold text-slate-700">{label}</td>
-                      <td className="px-4 py-2.5 text-slate-600">{formatTime(r.deliveryStart)}</td>
-                      <td className="px-4 py-2.5 text-slate-600">{formatTime(r.deliveryEnd)}</td>
-                      <td className="px-4 py-2.5 text-right font-semibold text-teal-700">
+                    <tr key={idx} className="transition hover:bg-canvas font-sans">
+                      <td className="px-4 py-2.5 font-bold text-ink">{label}</td>
+                      <td className="px-4 py-2.5 text-ink-muted">{formatTime(r.deliveryStart)}</td>
+                      <td className="px-4 py-2.5 text-ink-muted">{formatTime(r.deliveryEnd)}</td>
+                      <td className="px-4 py-2.5 text-right font-semibold text-brand">
                         {r.forecastMW !== null ? formatMW(r.forecastMW) : <span className="text-amber-500 font-sans italic text-[11px]">Unpublished</span>}
                       </td>
-                      <td className="px-4 py-2.5 text-slate-500 text-[11px]">
+                      <td className="px-4 py-2.5 text-ink-subtle text-[11px]">
                         {r.forecastPublishTime ? formatDateTime(r.forecastPublishTime) : '—'}
                       </td>
-                      <td className="px-4 py-2.5 text-right font-semibold text-emerald-700">
+                      <td className="px-4 py-2.5 text-right font-semibold text-ink">
                         {r.actualMW !== null ? formatMW(r.actualMW) : '—'}
                       </td>
                       <td
                         className={`px-4 py-2.5 text-right font-semibold ${
                           r.errorMW === null || r.errorMW === undefined
-                            ? 'text-slate-300'
+                            ? 'text-ink-subtle'
                             : isOver
                             ? 'text-amber-600'
-                            : 'text-emerald-600'
+                            : 'text-brand'
                         }`}
                       >
                         {r.errorMW !== null && r.errorMW !== undefined
                           ? `${r.errorMW > 0 ? '+' : ''}${formatMW(r.errorMW)}`
                           : '—'}
                       </td>
-                      <td className="px-4 py-2.5 text-right text-slate-600">
+                      <td className="px-4 py-2.5 text-right text-ink-muted">
                         {r.absErrorMW !== null && r.absErrorMW !== undefined ? formatMW(r.absErrorMW) : '—'}
                       </td>
-                      <td className="px-4 py-2.5 text-right text-slate-600">
+                      <td className="px-4 py-2.5 text-right text-ink-muted">
                         {r.pctError !== null && r.pctError !== undefined ? `${r.pctError > 0 ? '+' : ''}${r.pctError}%` : '—'}
                       </td>
                       <td className="px-4 py-2.5 text-center">
@@ -187,7 +187,7 @@ export function DeliveryPage() {
                         ) : isUnder ? (
                           <Badge variant="green">Under-forecast</Badge>
                         ) : (
-                          <Badge variant="teal">Exact Match</Badge>
+                          <Badge variant="green">Exact Match</Badge>
                         )}
                       </td>
                     </tr>
@@ -199,7 +199,7 @@ export function DeliveryPage() {
         )}
       </Card>
 
-      <p className="px-1 text-xs text-slate-400">
+      <p className="px-1 text-xs text-ink-subtle">
         Certified settlement stream: Elexon BMRS FUELHH & WINDFOR • Timestamps in UTC/GMT
       </p>
     </div>

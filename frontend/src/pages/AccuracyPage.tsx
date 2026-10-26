@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import {
   Bar,
   CartesianGrid,
@@ -61,34 +61,34 @@ export function AccuracyPage() {
         <div className="flex flex-wrap items-end justify-between gap-4 px-6 py-4">
           <div className="flex flex-wrap items-center gap-4">
             <div>
-              <label className="mb-1 block text-xs font-semibold text-slate-500">Evaluation Window Start</label>
+              <label className="mb-1 block text-xs font-semibold text-ink-muted">Evaluation Window Start</label>
               <input
                 type="date"
                 value={start}
                 min="2026-01-01"
                 max={end}
                 onChange={(e) => setStart(e.target.value)}
-                className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+                className="rounded-lg border border-line bg-surface px-3 py-1.5 text-sm font-medium text-ink shadow-sm outline-none focus:border-brand focus:ring-1 focus:ring-brand"
               />
             </div>
             <div>
-              <label className="mb-1 block text-xs font-semibold text-slate-500">Evaluation Window End</label>
+              <label className="mb-1 block text-xs font-semibold text-ink-muted">Evaluation Window End</label>
               <input
                 type="date"
                 value={end}
                 min={start}
                 max="2026-01-31"
                 onChange={(e) => setEnd(e.target.value)}
-                className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+                className="rounded-lg border border-line bg-surface px-3 py-1.5 text-sm font-medium text-ink shadow-sm outline-none focus:border-brand focus:ring-1 focus:ring-brand"
               />
             </div>
 
             <div>
-              <label className="mb-1 block text-xs font-semibold text-slate-500">D-1 Cutoff Time (UTC)</label>
+              <label className="mb-1 block text-xs font-semibold text-ink-muted">D-1 Cutoff Time (UTC)</label>
               <select
                 value={cutoffTime}
                 onChange={(e) => setCutoffTime(e.target.value)}
-                className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+                className="rounded-lg border border-line bg-surface px-3 py-1.5 text-sm font-medium text-ink shadow-sm outline-none focus:border-brand focus:ring-1 focus:ring-brand"
               >
                 {CUTOFF_PRESETS.map((p) => (
                   <option key={p.value} value={p.value}>
@@ -119,7 +119,7 @@ export function AccuracyPage() {
               size="sm"
               onClick={() => setPresetRange('2026-01-15', '2026-01-21')}
             >
-              Mid Month (15–21)
+              Mid Month (15â€“21)
             </Button>
             <Button
               variant={start === '2026-01-25' && end === '2026-01-31' ? 'primary' : 'secondary'}
@@ -133,7 +133,7 @@ export function AccuracyPage() {
       </Card>
 
       {isLoading ? (
-        <LoadingState label="Calculating quantitative accuracy metrics across January 2026…" />
+        <LoadingState label="Calculating quantitative accuracy metrics across January 2026â€¦" />
       ) : isError ? (
         <ErrorState message={accuracyResult.status === 'error' ? accuracyResult.message : 'Failed to load accuracy metrics'} />
       ) : isEmpty || !metrics ? (
@@ -146,8 +146,7 @@ export function AccuracyPage() {
               label="Mean Absolute Error (MAE)"
               value={formatMW(metrics.mae?.value)}
               icon={<Target className="h-5 w-5" />}
-              accent="teal"
-              sublabel="Mean deviation magnitude across intervals"
+              accent="brand"
             />
             <KPICard
               label="Root Mean Square Error (RMSE)"
@@ -158,7 +157,7 @@ export function AccuracyPage() {
             />
             <KPICard
               label="Directional Bias"
-              value={metrics.bias ? `${metrics.bias.value && metrics.bias.value > 0 ? '+' : ''}${metrics.bias.value} MW` : '—'}
+              value={metrics.bias ? `${metrics.bias.value && metrics.bias.value > 0 ? '+' : ''}${metrics.bias.value} MW` : 'â€”'}
               icon={<Scale className="h-5 w-5" />}
               accent={metrics.bias?.direction === 'over' ? 'amber' : 'green'}
               sublabel={
@@ -171,8 +170,8 @@ export function AccuracyPage() {
               label="Volume Weighted Error (WAPE)"
               value={formatPercent(metrics.wape?.value)}
               icon={<Percent className="h-5 w-5" />}
-              accent="teal"
-              sublabel={`${metrics.sampleCount} intervals • ${metrics.coveragePct}% verified`}
+              accent="brand"
+              sublabel={`${metrics.sampleCount} intervals â€¢ ${metrics.coveragePct}% verified`}
             />
           </div>
 
@@ -183,26 +182,26 @@ export function AccuracyPage() {
               subtitle={`Interval error progression at ${cutoffTime} UTC Day-Ahead Cutoff`}
               action={
                 <div className="flex items-center gap-2 text-xs">
-                  <Badge variant="teal">■ MAE (MW)</Badge>
-                  <Badge variant="amber">■ Directional Bias (MW)</Badge>
+                  <Badge variant="green">â–  MAE (MW)</Badge>
+                  <Badge variant="amber">â–  Directional Bias (MW)</Badge>
                 </div>
               }
             />
             <div className="px-2 py-6">
               <ResponsiveContainer width="100%" height={320}>
                 <ComposedChart data={chartData} margin={{ top: 10, right: 30, left: 10, bottom: 5 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                  <XAxis dataKey="date" tick={{ fontSize: 11, fill: '#64748b' }} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e6e4dd" />
+                  <XAxis dataKey="date" tick={{ fontSize: 11, fill: '#5a5856' }} />
                   <YAxis
-                    tick={{ fontSize: 12, fill: '#64748b' }}
-                    label={{ value: 'MW', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 12 }}
+                    tick={{ fontSize: 12, fill: '#5a5856' }}
+                    label={{ value: 'MW', angle: -90, position: 'insideLeft', fill: '#5a5856', fontSize: 12 }}
                   />
                   <Tooltip
-                    contentStyle={{ borderRadius: 12, border: '1px solid #cbd5e1', fontSize: 12 }}
+                    contentStyle={{ borderRadius: 12, border: '1px solid #e6e4dd', fontSize: 12 }}
                     formatter={(val, name) => [formatMW(Number(val)), name]}
                   />
                   <Legend />
-                  <Bar dataKey="MAE" name="Mean Absolute Error (MW)" fill="#0d9488" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="MAE" name="Mean Absolute Error (MW)" fill="#148937" radius={[4, 4, 0, 0]} />
                   <Line
                     type="monotone"
                     dataKey="Bias"
@@ -223,61 +222,61 @@ export function AccuracyPage() {
               subtitle="Continuous variance diagnostics for day-ahead auction position hedging"
             />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-6">
-              <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-4 space-y-2">
+              <div className="rounded-xl border border-line bg-surface-warm p-4 space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">Directional Skew</span>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-ink-muted">Directional Skew</span>
                   <Badge variant={metrics.bias?.direction === 'over' ? 'amber' : 'green'}>
                     {metrics.bias?.direction === 'over' ? 'Over-Forecast Bias' : 'Under-Forecast'}
                   </Badge>
                 </div>
-                <div className="text-xl font-bold text-slate-900 font-mono">
-                  {metrics.bias ? `${metrics.bias.value > 0 ? '+' : ''}${metrics.bias.value} MW` : '—'}
+                <div className="text-xl font-bold text-ink font-mono">
+                  {metrics.bias ? `${metrics.bias.value > 0 ? '+' : ''}${metrics.bias.value} MW` : 'â€”'}
                 </div>
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <p className="text-xs text-ink-muted leading-relaxed">
                   National wind generation consistently fell short of day-ahead forecasts throughout the delivery window.
                   Trading desks should factor an upward safety buffer into thermal commitments to mitigate imbalance exposure.
                 </p>
               </div>
 
-              <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-4 space-y-2">
+              <div className="rounded-xl border border-line bg-surface-warm p-4 space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">Tail-Risk Ratio (RMSE/MAE)</span>
-                  <Badge variant="teal">1.23x Dispersion</Badge>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-ink-muted">Tail-Risk Ratio (RMSE/MAE)</span>
+                  <Badge variant="green">1.23x Dispersion</Badge>
                 </div>
-                <div className="text-xl font-bold text-slate-900 font-mono">
-                  {formatMW(metrics.rmse?.value)} <span className="text-xs font-sans text-slate-400 font-normal">RMSE</span>
+                <div className="text-xl font-bold text-ink font-mono">
+                  {formatMW(metrics.rmse?.value)} <span className="text-xs font-sans text-ink-subtle font-normal">RMSE</span>
                 </div>
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <p className="text-xs text-ink-muted leading-relaxed">
                   The 1.23 ratio of RMSE to MAE confirms steady, persistent forecast drift rather than isolated extreme ramp busts.
                   Forecast error behaves as a structural offset across standard operating regimes.
                 </p>
               </div>
 
-              <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-4 space-y-2">
+              <div className="rounded-xl border border-line bg-surface-warm p-4 space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">Aggregate Volume Error</span>
-                  <Badge variant="teal">WAPE Benchmark</Badge>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-ink-muted">Aggregate Volume Error</span>
+                  <Badge variant="green">WAPE Benchmark</Badge>
                 </div>
-                <div className="text-xl font-bold text-slate-900 font-mono">
+                <div className="text-xl font-bold text-ink font-mono">
                   {formatPercent(metrics.wape?.value)}
                 </div>
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <p className="text-xs text-ink-muted leading-relaxed">
                   Volume-weighted accuracy normalizes absolute deviations against aggregate delivered generation across the grid,
                   eliminating low-denominator distortion while maintaining standard wholesale market comparability.
                 </p>
               </div>
 
-              <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-4 space-y-2">
+              <div className="rounded-xl border border-line bg-surface-warm p-4 space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">Audit & Data Integrity</span>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-ink-muted">Audit & Data Integrity</span>
                   <Badge variant="green">
                     <ShieldCheck className="h-3 w-3 mr-1 inline" /> Certified Feed
                   </Badge>
                 </div>
-                <div className="text-xl font-bold text-slate-900 font-mono">
-                  {metrics.coveragePct}% <span className="text-xs font-sans text-slate-400 font-normal">({metrics.sampleCount}/{metrics.expectedIntervals} intervals)</span>
+                <div className="text-xl font-bold text-ink font-mono">
+                  {metrics.coveragePct}% <span className="text-xs font-sans text-ink-subtle font-normal">({metrics.sampleCount}/{metrics.expectedIntervals} intervals)</span>
                 </div>
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <p className="text-xs text-ink-muted leading-relaxed">
                   All metrics computed strictly from genuine matched pairs across Elexon BMRS FUELHH actuals and WINDFOR forecasts.
                   Zero synthetic imputation and strict D-1 gate closure enforcement.
                 </p>
@@ -289,3 +288,4 @@ export function AccuracyPage() {
     </div>
   );
 }
+

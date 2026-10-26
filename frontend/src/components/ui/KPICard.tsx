@@ -14,45 +14,46 @@ export function KPICard({
   value: string | number;
   unit?: string;
   icon: ReactNode;
-  accent?: 'teal' | 'green' | 'amber' | 'slate' | 'red';
+  accent?: 'teal' | 'green' | 'amber' | 'slate' | 'red' | 'brand';
   trend?: { direction: 'up' | 'down' | 'flat'; text: string };
   sublabel?: string;
 }) {
   const accentMap: Record<string, string> = {
-    teal: 'bg-teal-50 text-teal-600',
-    green: 'bg-emerald-50 text-emerald-600',
-    amber: 'bg-amber-50 text-amber-600',
-    slate: 'bg-slate-100 text-slate-500',
-    red: 'bg-red-50 text-red-600',
+    teal: 'bg-brand/10 text-brand border border-brand/20',
+    brand: 'bg-brand/10 text-brand border border-brand/20',
+    green: 'bg-emerald-50 text-emerald-700 border border-emerald-200/60',
+    amber: 'bg-amber-50 text-amber-700 border border-amber-200/60',
+    slate: 'bg-surface-warm text-ink-muted border border-line',
+    red: 'bg-red-50 text-red-600 border border-red-200/60',
   };
 
   const TrendIcon = trend?.direction === 'up' ? TrendingUp : trend?.direction === 'down' ? TrendingDown : Minus;
   const trendColor =
     trend?.direction === 'up'
-      ? 'text-emerald-600'
+      ? 'text-emerald-700'
       : trend?.direction === 'down'
-      ? 'text-red-500'
-      : 'text-slate-400';
+      ? 'text-red-600'
+      : 'text-ink-subtle';
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md">
-      <div className="flex items-start justify-between">
-        <div className={`flex h-11 w-11 items-center justify-center rounded-xl ${accentMap[accent]}`}>
+    <div className="rounded-xl border border-line bg-white p-5 shadow-[0_1px_3px_rgba(43,42,42,0.04)] transition hover:border-line-muted hover:shadow-[0_4px_12px_rgba(43,42,42,0.06)]">
+      <div className="flex items-start justify-between gap-3">
+        <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${accentMap[accent]}`}>
           {icon}
         </div>
         {trend && (
-          <div className={`flex items-center gap-1 text-xs font-semibold ${trendColor}`}>
+          <div className={`flex items-center gap-1 text-xs font-medium font-mono ${trendColor}`}>
             <TrendIcon className="h-3.5 w-3.5" />
             {trend.text}
           </div>
         )}
       </div>
-      <p className="mt-4 text-sm font-medium text-slate-400">{label}</p>
-      <p className="mt-1 text-2xl font-bold tracking-tight text-slate-800">
-        {value}
-        {unit && <span className="ml-1 text-base font-semibold text-slate-400">{unit}</span>}
-      </p>
-      {sublabel && <p className="mt-1 text-xs text-slate-400">{sublabel}</p>}
+      <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-ink-muted">{label}</p>
+      <div className="mt-1 flex items-baseline gap-1.5 font-mono">
+        <span className="text-2xl font-bold tracking-tight text-ink">{value}</span>
+        {unit && <span className="text-xs font-medium text-ink-muted">{unit}</span>}
+      </div>
+      {sublabel && <p className="mt-2 text-xs text-ink-subtle">{sublabel}</p>}
     </div>
   );
 }

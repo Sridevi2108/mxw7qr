@@ -26,26 +26,26 @@ export function Topbar({
 }) {
   const meta = TITLES[page];
   return (
-    <header className="sticky top-0 z-10 flex flex-wrap items-center justify-between border-b border-slate-200 bg-white/95 px-8 py-4 backdrop-blur shadow-sm">
+    <header className="sticky top-0 z-10 flex flex-wrap items-center justify-between border-b border-line bg-white/90 px-8 py-3.5 backdrop-blur-md">
       <div>
-        <h2 className="text-xl font-bold tracking-tight text-slate-800">{meta.title}</h2>
-        <p className="text-sm text-slate-500">{meta.subtitle}</p>
+        <h2 className="text-lg font-bold tracking-tight text-ink">{meta.title}</h2>
+        <p className="text-xs text-ink-muted">{meta.subtitle}</p>
       </div>
-      <div className="flex items-center gap-3">
-        <div className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-700">
-          <Calendar className="h-3.5 w-3.5 text-teal-600" />
-          <span>January 2026 Dataset</span>
+      <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-1.5 rounded-md border border-line bg-surface-warm px-2.5 py-1 text-xs font-medium text-ink-muted">
+          <Calendar className="h-3.5 w-3.5 text-brand" />
+          <span className="font-mono">January 2026</span>
         </div>
 
         {isLiveBackend ? (
-          <Badge variant="green">
-            <CheckCircle2 className="h-3.5 w-3.5 mr-1 text-emerald-600" />
-            FastAPI Backend Live
+          <Badge variant="brand">
+            <CheckCircle2 className="h-3.5 w-3.5 mr-1 text-brand" />
+            FastAPI Live
           </Badge>
         ) : (
           <Badge variant="teal">
-            <Database className="h-3.5 w-3.5 mr-1 text-teal-600" />
-            Verified Elexon BMRS Cache
+            <Database className="h-3.5 w-3.5 mr-1 text-brand" />
+            BMRS Cache
           </Badge>
         )}
       </div>
