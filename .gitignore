@@ -12,8 +12,9 @@ __pycache__/
 .coverage
 htmlcov/
 
-# Markdown documentation (excluded from repo)
+# Markdown documentation (excluded from repo except root README.md)
 *.md
+!README.md
 
 # Node / Frontend build artifacts
 node_modules/
