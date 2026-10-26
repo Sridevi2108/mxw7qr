@@ -4,16 +4,16 @@ import { Database, CheckCircle2, Calendar } from 'lucide-react';
 
 const TITLES: Record<PageKey, { title: string; subtitle: string }> = {
   dashboard: {
-    title: 'UK Day-Ahead Decision Cockpit',
-    subtitle: 'Evaluate latest Elexon wind forecasts available at D-1 auction gate closure',
+    title: 'Day-Ahead Decision Cockpit',
+    subtitle: 'Renewable dispatch intelligence & auction gate evaluation',
   },
   accuracy: {
-    title: 'Forecast Accuracy & Error Scorecard',
-    subtitle: 'Quantitative evaluation (MAE, RMSE, Mean Bias & WAPE) across January 2026',
+    title: 'Forecast Accuracy & Variance Analytics',
+    subtitle: 'Systematic error monitoring & risk metrics across January 2026',
   },
   delivery: {
-    title: 'Delivery Ledger & CSV Audit',
-    subtitle: 'Half-hourly and hourly settlement intervals with forecast publication timestamps',
+    title: 'Delivery Ledger & Audit Trail',
+    subtitle: 'Granular settlement intervals & certified publication vintages',
   },
 };
 

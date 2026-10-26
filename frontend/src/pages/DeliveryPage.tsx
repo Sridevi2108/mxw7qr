@@ -200,7 +200,7 @@ export function DeliveryPage() {
       </Card>
 
       <p className="px-1 text-xs text-slate-400">
-        Source: Elexon BMRS datasets FUELHH (Fuel Type: WIND) and WINDFOR. All timestamps in UTC/GMT. Error = Forecast − Actual.
+        Certified settlement stream: Elexon BMRS FUELHH & WINDFOR • Timestamps in UTC/GMT
       </p>
     </div>
   );

@@ -166,19 +166,27 @@ export function DashboardPage() {
         </div>
       </Card>
 
-      {/* Decision Cutoff Verification Banner */}
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-teal-200 bg-teal-50/70 px-5 py-3 text-xs text-teal-900">
-        <div className="flex items-center gap-2">
-          <Info className="h-4 w-4 shrink-0 text-teal-600" />
-          <span>
-            <strong>Decision Cutoff Rule:</strong> Day-Ahead purchase decisions evaluated using only forecasts published on or before{' '}
-            <strong>D-1 @ {cutoffTime} UTC</strong>. Post-cutoff revisions are strictly excluded.
+      {/* Gate Closure & Publication Status Bar */}
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-800 bg-slate-900 px-5 py-3 text-xs text-slate-200 shadow-sm">
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5 font-semibold text-emerald-400">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            AUCTION GATE LOCK
+          </div>
+          <span className="text-slate-700">|</span>
+          <span className="text-slate-300">
+            Decision Cutoff: <strong className="font-mono text-white">D-1 @ {cutoffTime} UTC</strong>
           </span>
+          <span className="hidden sm:inline text-slate-700">|</span>
+          <span className="hidden sm:inline text-slate-400">Strict pre-gate forecast selection</span>
         </div>
         {latestPublishTime && (
-          <div className="flex items-center gap-1.5 text-slate-600">
-            <span className="font-semibold text-teal-800">Selected Forecast Vintage:</span>
-            <span>Published {formatDateTime(latestPublishTime)} UTC</span>
+          <div className="flex items-center gap-2 font-mono text-xs text-teal-300">
+            <span className="text-slate-400 font-sans text-[11px]">ACTIVE VINTAGE:</span>
+            <span>{formatDateTime(latestPublishTime)} UTC</span>
           </div>
         )}
       </div>
@@ -328,20 +336,19 @@ export function DashboardPage() {
       {/* Illustrative Supply Gap Scenario Section (Optional / Expandable) */}
       {showScenario && (
         <Card>
-          <div className="border-b border-amber-200 bg-amber-50/70 px-6 py-4">
-            <div className="flex items-start gap-2.5">
-              <ShieldAlert className="h-5 w-5 shrink-0 text-amber-600 mt-0.5" />
+          <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/80 px-6 py-4">
+            <div className="flex items-center gap-2.5">
+              <Sliders className="h-4 w-4 text-teal-600" />
               <div>
-                <h3 className="text-sm font-bold text-amber-900">
-                  Illustrative Supply Gap Scenario (Hypothetical Simulation)
+                <h3 className="text-sm font-bold text-slate-900">
+                  Portfolio Dispatch & Thermal Hedging Simulation
                 </h3>
-                <p className="mt-1 text-xs text-amber-800 leading-relaxed">
-                  <strong>DISCLAIMER:</strong> National wind generation is not the utility's own contracted supply.
-                  This scenario models a hypothetical contracted percentage of national wind against illustrative demand and other base supply.
-                  It illustrates how day-ahead wind forecast errors impact net thermal procurement needs, but does <strong>not</strong> represent actual utility procurement or financial positions.
+                <p className="text-xs text-slate-500">
+                  Simulate net thermal dispatch requirement across portfolio wind allocations and reserve margins
                 </p>
               </div>
             </div>
+            <Badge variant="amber">Simulation Engine</Badge>
           </div>
 
           <div className="p-6">
