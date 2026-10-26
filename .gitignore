@@ -4,12 +4,16 @@ __pycache__/
 *$py.class
 *.sqlite3
 *.db
+!backend/data/windwise.db
 *.db-journal
 
 # Python test and coverage caches
 .pytest_cache/
 .coverage
 htmlcov/
+
+# Markdown documentation (excluded from repo)
+*.md
 
 # Node / Frontend build artifacts
 node_modules/
